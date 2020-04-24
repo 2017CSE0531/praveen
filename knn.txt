@@ -1,0 +1,19 @@
+import SMOTE
+import Counter
+import imblearn
+print(imblearn.__version__)
+x1_train, x1_val, y1_train, y1_val = train_test_split(x_scaled, y1, random_state=0)
+knn = KNeighborsClassifier(n_neighbors=10)
+model=knn.fit(x1_train, y1_train)
+pred = model.predict(x1_val)
+pred
+print("Training set score: {:.2f}".format(knn.score(x1_train, y1_train)))
+print("Validation set score: {:.2f}".format(knn.score(x1_val, y1_val)))
+# KNN Plot
+mglearn.plots.plot_knn_classification(n_neighbors=10)
+plt.show()
+cross_val_predict
+scores = cross_val_score(model, x_scaled, y1, cv=10)
+print ("Cross-validated scores:", scores)
+print("Mean score: {}".format(np.mean(scores))
+plt.show()

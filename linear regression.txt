@@ -1,0 +1,44 @@
+import pandas as pd
+import numpy as np
+import read_csv
+import matplotlib.pyplot as plt
+import warnings
+warnings.filterwarnings('ignore')
+import os
+
+linkname = '../input/bank-full.csv'
+dataset1 = pd.read_csv(linkname, sep = ';')
+dataset1.head()
+condition = dataset1.poutcome == 'other'
+dataset2 = dataset1.drop(dataset1[condition].index, axis = 0, inplace = False
+dataset2[['job','education']] = dataset2[['job','education']].replace(['unknown'],'other'
+
+dataset2[['balance']].mean()
+dataset2[['balance']].mean()
+
+dataset2['balance_outliers'] = dataset2['balance']
+dataset2['balance_outliers']= zscore(dataset2['balance_outliers'])
+
+condition1 = (dataset2['balance_outliers']>3) | (dataset2['balance_outliers']<-3 )
+dataset3 = dataset2.drop(dataset2[condition1].index, axis = 0, inplace = False)
+dataset4 = dataset3.drop('balance_outliers', axis=1)
+dataset4.rename(index=str, columns={'y': 'response'}, inplace = True)
+
+def convert(dataset4, new_column, old_column):
+    dataset4[new_column] = dataset4[old_column].apply(lambda x: 0 if x == 'no' else 1)
+    return dataset4[new_column].value_counts()
+
+convert(dataset4, "response_binary", "response")
+dist_age_balance = plt.figure(figsize = (10,6))
+
+ra1 = dist_age_balance.add_subplot(1,2,1) 
+ra2 = dist_age_balance.add_subplot(1,2,2)
+
+ra1.hist(dataset7['age'])
+ra1.set_title('The Distribution of Age')
+
+ra2.hist(dataset7['balance'], color = 'skyblue')
+ra2.set_title('The Distribution of Balance')
+
+plt.tight_layout() 
+plt.show()
